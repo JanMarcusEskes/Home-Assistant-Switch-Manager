@@ -15,6 +15,9 @@ info: |
     BUTTON MAPPING (5 rows, left = odd, right = even):
       Left column:  k1  k3  k5  k7  k9
       Right column: k2  k4  k6  k8  k10
+    Not every key/action combination has been verified on a real device yet. Check the mapping with
+    the live monitor (press a key and see which box lights up); if your firmware numbers the keys
+    differently, swap the action_buttons.0 values below.
 buttons:
   - x: 17   # k1
     y: 9
