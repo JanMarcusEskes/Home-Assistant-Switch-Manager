@@ -1,4 +1,4 @@
-name: GE Cync Keypad Dimmer
+name: GE Cync Keypad Dimmer (CSWDMBLK5T1)
 service: Matter
 event_type: event_entity
 identifier_key: device_id
@@ -8,8 +8,8 @@ info: Requires Switch Manager 5.0+. Identifier is the Home Assistant device ID.
   dimmable light. The center button and dim arrows control the local load
   and do not emit button events.
 buttons:
-- x: 73
-  y: 109
+- x: 65
+  y: 101
   width: 169
   height: 54
   conditions:
@@ -32,8 +32,8 @@ buttons:
     conditions:
     - key: event_type
       value: long_release
-- x: 73
-  y: 166
+- x: 65
+  y: 158
   width: 169
   height: 53
   conditions:
