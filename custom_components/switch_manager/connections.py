@@ -17,6 +17,7 @@ from .models import ManagedSwitchConfig, reconcile_buttons_with_blueprint, async
 
 async def async_setup_connections( hass ):
   
+    @websocket_api.require_admin
     @websocket_api.websocket_command({
         vol.Required("type"): "switch_manager/blueprints", 
         vol.Optional("blueprint_id"): cv.string
@@ -33,6 +34,7 @@ async def async_setup_connections( hass ):
 
         connection.send_result( msg["id"], data )
 
+    @websocket_api.require_admin
     @websocket_api.websocket_command({
         vol.Required("type"): "switch_manager/blueprints/auto_discovery", 
         vol.Optional("blueprint_id"): cv.string,
@@ -61,6 +63,7 @@ async def async_setup_connections( hass ):
         connection.subscriptions[msg["id"]] = close_connection
         connection.send_result(msg["id"])
 
+    @websocket_api.require_admin
     @websocket_api.websocket_command({
         vol.Required("type"): "switch_manager/zigbee2mqtt/instances"
     })
@@ -74,6 +77,7 @@ async def async_setup_connections( hass ):
         instances = await async_discover_zigbee2mqtt_instances(hass)
         connection.send_result(msg["id"], { "instances": instances })
 
+    @websocket_api.require_admin
     @websocket_api.websocket_command({
         vol.Required("type"): "switch_manager/configs", 
         vol.Optional("config_id"): cv.string
@@ -90,6 +94,7 @@ async def async_setup_connections( hass ):
 
         connection.send_result( msg["id"], data )
 
+    @websocket_api.require_admin
     @websocket_api.websocket_command({
         vol.Required("type"): "switch_manager/config/monitor", 
         vol.Optional("config_id"): cv.string
@@ -115,6 +120,7 @@ async def async_setup_connections( hass ):
         connection.subscriptions[msg["id"]] = close_connection
         connection.send_result(msg["id"])
 
+    @websocket_api.require_admin
     @websocket_api.websocket_command({
         vol.Required("type"): "switch_manager/config/save", 
         vol.Required('config'): SWITCH_MANAGER_CONFIG_SCHEMA,
@@ -166,6 +172,7 @@ async def async_setup_connections( hass ):
             "config": config
         })
 
+    @websocket_api.require_admin
     @websocket_api.websocket_command({
         vol.Required("type"): "switch_manager/config/enabled", 
         vol.Required("config_id"): cv.string,
@@ -190,6 +197,7 @@ async def async_setup_connections( hass ):
             "enabled": msg['enabled']
         })
 
+    @websocket_api.require_admin
     @websocket_api.websocket_command({
         vol.Required("type"): "switch_manager/config/delete", 
         vol.Optional("config_id"): cv.string
@@ -211,6 +219,7 @@ async def async_setup_connections( hass ):
             "deleted": msg['config_id']
         })
 
+    @websocket_api.require_admin
     @websocket_api.websocket_command({
         vol.Required("type"): "switch_manager/config/duplicate",
         vol.Required("config_id"): cv.string
@@ -251,6 +260,7 @@ async def async_setup_connections( hass ):
             "config_id": new_config.id
         })
 
+    @websocket_api.require_admin
     @websocket_api.websocket_command({
         vol.Required("type"): "switch_manager/copy_from_list",
         vol.Required("blueprint_id"): cv.string,
@@ -270,6 +280,7 @@ async def async_setup_connections( hass ):
             "switches": data
         })
 
+    @websocket_api.require_admin
     @websocket_api.websocket_command({
         vol.Required("type"): "switch_manager/run_action",
         vol.Required("action"): dict,
